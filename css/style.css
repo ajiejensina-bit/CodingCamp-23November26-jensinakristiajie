@@ -1,0 +1,409 @@
+/* ===== Color palette (dari color palette Alhaitham, Caramello Art) =====
+   Off-white  #f1f2ed  -> kartu
+   Sage       #a5bb80  -> background halaman
+   Ink        #2a3130  -> teks, judul, banner
+   Teal       #3b7d7b  -> warna utama (tombol, angka)
+   Olive      #858364  -> aksen
+*/
+:root {
+  --offwhite: #f1f2ed;
+  --sage: #a5bb80;
+  --ink: #2a3130;
+  --teal: #3b7d7b;
+  --teal-dark: #2e6361;
+  --olive: #858364;
+  --card: #f1f2ed;
+  --line: #dfe1d6;
+  --muted: #5f5e4a;
+  --danger: #b3392f;
+  --danger-soft: #f6e0dc;
+}
+
+/* ===== Dasar ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--sage);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0 0 20px;
+  padding: 14px 20px;
+  text-align: center;
+  font-size: 22px;
+  color: var(--offwhite);
+  background: var(--ink);
+  border-bottom: 4px solid var(--teal);
+  border-radius: 10px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-top: 0;
+  color: var(--ink);
+}
+
+/* ===== Kartu ===== */
+.card {
+  background: var(--card);
+  border-top: 4px solid var(--teal);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(42, 49, 48, 0.18);
+}
+
+/* Dua kartu berdampingan di layar besar, bertumpuk di HP */
+.row {
+  display: block;
+}
+
+@media (min-width: 700px) {
+  .row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .row .card {
+    flex: 1;
+  }
+}
+
+/* ===== Total balance ===== */
+.small-text {
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.balance {
+  margin: 5px 0 15px;
+  text-align: center;
+  font-size: 42px;
+  font-weight: bold;
+  color: var(--teal);
+}
+
+/* Kalau melewati batas: kartu jadi merah */
+.over-limit {
+  background: var(--danger-soft);
+  border: 2px solid var(--danger);
+}
+
+.over-limit .balance {
+  color: var(--danger);
+}
+
+.warning {
+  display: none;
+  text-align: center;
+  color: var(--danger);
+  font-weight: bold;
+}
+
+/* Keterangan kecil di bawah kotak limit */
+.hint {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ===== Form ===== */
+label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #b9bda9;
+  border-radius: 6px;
+}
+
+hr {
+  margin: 20px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.error {
+  display: none;
+  margin: 10px 0 0;
+  color: var(--danger);
+  font-size: 14px;
+}
+
+/* ===== Tombol ===== */
+.btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.blue {
+  background: var(--teal);
+  color: white;
+}
+
+.blue:hover {
+  background: var(--teal-dark);
+  filter: none;
+}
+
+.gray {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.delete-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===== Daftar transaksi ===== */
+#transaction-list {
+  max-height: 300px;
+  overflow-y: auto; /* bisa di-scroll */
+  margin-top: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Transaksi yang melewati batas */
+.item.over-limit {
+  background: var(--danger-soft);
+  border: none;
+  border-left: 4px solid var(--danger);
+}
+
+.item-amount {
+  color: var(--teal);
+  font-weight: bold;
+}
+
+.item.over-limit .item-amount {
+  color: var(--danger);
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: white;
+  border-radius: 10px;
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* ===== Ringkasan bulanan ===== */
+.month-total {
+  margin: 15px 0 0;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--teal);
+  text-align: center;
+}
+
+/* Total bulan melewati limit */
+.month-total.month-over {
+  color: var(--danger);
+}
+
+.month-row {
+  margin-top: 12px;
+}
+
+.month-row-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.bar {
+  height: 8px;
+  margin-top: 4px;
+  background: var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.item-date {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ===== Interaksi ===== */
+
+/* Efek hover & klik pada tombol */
+.btn:hover,
+.delete-btn:hover {
+  filter: brightness(1.1);
+}
+
+.btn:active,
+.delete-btn:active {
+  transform: scale(0.97);
+}
+
+/* Kotak input menyala saat dipilih */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(59, 125, 123, 0.3);
+}
+
+/* Tombol filter kategori */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chip {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--ink);
+  background: var(--line);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.chip:hover {
+  background: #d3d6c7;
+}
+
+.chip.active {
+  background: var(--teal);
+  color: white;
+}
+
+/* Item transaksi: hover, muncul, dan menghilang */
+.item {
+  transition: opacity 0.2s, transform 0.2s, background 0.2s;
+}
+
+.item:not(.over-limit):hover {
+  background: #e8ebe0;
+}
+
+.item.new {
+  animation: slide-in 0.35s ease;
+}
+
+.item.removing {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    background: #dfe9cf;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bar ringkasan bulanan tumbuh pelan */
+.bar-fill {
+  transition: width 0.5s ease;
+}
+
+/* Pesan "deleted" + Undo */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  color: white;
+  background: var(--ink);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 20px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.toast button {
+  padding: 4px 10px;
+  color: var(--sage);
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toast button:hover {
+  text-decoration: underline;
+}
+
+/* Hormati pengguna yang mematikan animasi */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
